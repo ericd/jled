@@ -6,12 +6,14 @@ if(IDF_VER) # ESP-IDF component (ESP32)
         endif()
         if(IDF_VERSION_MINOR EQUAL 3)
             list(APPEND priv_requires esp_driver_ledc)
+            list(APPEND requires esp_driver_gpio)
         endif()
     endif()
     list(APPEND priv_requires esp_timer)
 
     idf_component_register(
         SRCS "src/jled_base.cpp" "src/esp32_hal.cpp"  
+        REQUIRES ${requires}
         PRIV_REQUIRES ${priv_requires}
         INCLUDE_DIRS "src")
 
